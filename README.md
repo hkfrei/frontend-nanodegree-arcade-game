@@ -32,6 +32,7 @@ open [http://localhost:8000/index.html](http://localhost:8000/index.html) in you
 - The goal is to reach the blue water zone at the top of the playground.
 - Try to collect all the stars, they give you additional points.
 - Avoid colliding with the bugs, they will kill you and the game is over.
+- You can start a new game by clicking on the green "new game" button.
 - every time you make it to the water area, the bugs move a bit faster and therefore the game gets more difficult.
 - If you reach a score over 60 points, a 4th bug appears on the screen.
 
