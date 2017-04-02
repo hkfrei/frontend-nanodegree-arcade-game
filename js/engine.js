@@ -23,10 +23,12 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        lastTime;
+        lastTime,
+        //variable to pause the game
+        pause = false;
 
     canvas.width = 505;
-    canvas.height = 606;
+    canvas.height = 550;
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -42,11 +44,14 @@ var Engine = (function(global) {
         var now = Date.now(),
             dt = (now - lastTime) / 1000.0;
 
-        /* Call our update/render functions, pass along the time delta to
+        /* If not in pause mode, call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
-        update(dt);
-        render();
+         if (!pause) {
+            update(dt);
+            render();
+        }
+
 
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
@@ -80,7 +85,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
 
     /* This is called by the update function and loops through all of the
@@ -95,6 +100,37 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+    }
+
+    /* @description This is called by the update function and loops through allEnemies and
+     * allCollectItems Arraya and checks for collisions with the player.
+     */
+    function checkCollisions() {
+        //calculate the player zone (square of 40px x 40px)
+        var xmin = player.x - 40;
+        var xmax = player.x + 40;
+        var ymin = player.y - 40;
+        var ymax = player.y + 40;
+
+        //check if any enemy collides with the player zone.
+        allEnemies.forEach(function(enemy) {
+            if ((enemy.x <= xmax && enemy.x >= xmin) && ((enemy.y <= ymax && enemy.y >= ymin))) {
+                console.log('collision!!!');
+                reset();
+            }
+        });
+
+        //check if any collect item collides with the player zone.
+        allCollectItems.forEach(function(item, index, array) {
+            if ((item.x <= xmax && item.x >= xmin) && ((item.y <= ymax && item.y >= ymin))) {
+                console.log('collected!!!');
+                //remove the item
+                array.splice(index, 1);
+                //increase the score
+                player.score += 10;
+                player.updateHighScore();
+            }
+        });
     }
 
     /* This function initially draws the "game level", it will then call
@@ -150,16 +186,44 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
-
+        allCollectItems.forEach(function(item) {
+            item.render();
+        });
         player.render();
     }
 
-    /* This function does nothing but it could have been a good place to
-     * handle game reset states - maybe a new game menu or a game over screen
-     * those sorts of things. It's only called once by the init() method.
+    /* @description This function handles game reset states when player collides with an enemy.
+     * shows Game-Over message and a button to continue.
+     * pause the game.
+     * decrease enemy speed to default.
+     * remove the fourth enemy if it exists.
+     * It's only called once by the init() method and this call is currently ignored.
      */
     function reset() {
-        // noop
+        var messages = document.querySelector(".failMessage");
+        if (reset.caller.name === '') {
+            messages.style.display = 'block';
+            pause = true;
+            document.querySelector(".proceed").addEventListener('click', function() {
+                player.x = 200;
+                player.y = 400;
+                player.score = 0;
+                //decrease the enemy speed
+                allEnemies.forEach(function(enemy, index) {
+                    if (index % 2 !== 0) {
+                        enemy.speed = 2;
+                    } else {
+                        enemy.speed = 1;
+                    }
+                });
+                //remove the fourth enemy if it exists
+                if (allEnemies.length === 4) {
+                    allEnemies.pop();
+                }
+                messages.style.display = 'none';
+                pause = false;
+            });
+        }
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -171,7 +235,13 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/char-cat-girl.png',
+        'images/char-horn-girl.png',
+        'images/char-pink-girl.png',
+        'images/char-princess-girl.png',
+        'images/Star.png'
+
     ]);
     Resources.onReady(init);
 

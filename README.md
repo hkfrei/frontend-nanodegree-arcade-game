@@ -1,6 +1,43 @@
-frontend-nanodegree-arcade-game
-===============================
+# Classic Arcade Game Clone
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+A classic arcade game, built upon the template provided by UDACITY in it's Front-End Web Developer Nanodegree.
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+## Prerequisites
+
+The only thing you need to run the game is WebBrowser with javascript enabled.
+If you have one, a local Web-Server would help to test the game under real world conditions, but it is not necessary.
+
+## Installing
+
+Download a copy of the Game either by:
+- Downloading the .zip File from [https://github.com/hkfrei/frontend-nanodegree-arcade-game](https://github.com/hkfrei/frontend-nanodegree-arcade-game) or
+- by cloning the git repo to your local machine: `git clone git@github.com:hkfrei/frontend-nanodegree-arcade-game.git`.
+
+## Start the game
+- open **index.html** in a Web Browser und you can start playing the game.
+- if you want to play the game in a Web-Server context, start a local Webserver from the root directory of the project.
+- If you have php installed and your root directory is under _~/Sites/UDACITY/frontend-nanodegree-arcade-game_ you can use these commands in your console:
+```bash
+#change to root directory
+cd ~/SITES/UDACITY/frontend-nanodegree-arcade-game
+#start the web-server
+php -S localhost:8000
+```
+open [http://localhost:8000/index.html](http://localhost:8000/index.html) in your Browser.
+
+## Play the game
+- Use the arrow keys of your keyboard to move te player around.
+- The goal is to reach the water zone at the top of the playground.
+- Try to collect all the stars, they give you additional points.
+- Avoid colliding with the bugs, they will kill you and the game is over.
+- every time you make it to the water area, the bugs move a bit faster and therefore the game gets more difficult.
+- If you reach a score over 60 points, a 4th bug appears on the screen.
+
+
+## Authors
+* **UDACITY** - *providing a template and the game loop* - [https://www.udacity.com/](https://www.udacity.com/)
+* **Hanskaspar Frei** - *programming various functions to make a playable game from the template.*
+
+## License
+
+This project is licensed under the Apache License - see the [LICENSE.md](LICENSE.md) file for details
