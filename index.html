@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Effective JavaScript: Frogger</title>
+    <title>classic arcade game</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -24,10 +24,13 @@
             <img class="sprite" src="images/char-princess-girl.png" alt="char-princess-girl">
         </button>
     </div>
-    <!-- scripts at bottom, page loads faster -->
+
+    <!-- scripts create canvas and start the game loop -->
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>
+
+    <!-- Messages that can appear when the game is running -->
     <div class="failMessage">
         <h2>Sorry, GAME - OVER</h2>
         <button class="proceed">new game!</button>
@@ -37,6 +40,5 @@
         <span class="points">0</span> Points<br>
         Your Highscore: <span class="highscore">0</span> Points
     </div>
-
 </body>
 </html>
