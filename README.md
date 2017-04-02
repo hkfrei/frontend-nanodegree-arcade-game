@@ -27,8 +27,9 @@ php -S localhost:8000
 open [http://localhost:8000/index.html](http://localhost:8000/index.html) in your Browser.
 
 ## Play the game
+- If you dont't like the default one, choose a new character by clicking on one of the characters on top of the site.
 - Use the arrow keys of your keyboard to move the player around.
-- The goal is to reach the water zone at the top of the playground.
+- The goal is to reach the blue water zone at the top of the playground.
 - Try to collect all the stars, they give you additional points.
 - Avoid colliding with the bugs, they will kill you and the game is over.
 - every time you make it to the water area, the bugs move a bit faster and therefore the game gets more difficult.
