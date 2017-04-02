@@ -35,9 +35,9 @@ open [http://localhost:8000/index.html](http://localhost:8000/index.html) in you
 
 
 ## Authors
-* **UDACITY** - *providing a template and the game loop* - [https://www.udacity.com/](https://www.udacity.com/)
+* **UDACITY** - *providing a template and the game loop* - [https://github.com/udacity/frontend-nanodegree-arcade-game](https://github.com/udacity/frontend-nanodegree-arcade-game)
 * **Hanskaspar Frei** - *programming various functions to make a playable game from the template.*
 
 ## License
 
-This project is licensed under the Apache License - see the [LICENSE.md](LICENSE.md) file for details
+This project currently doesn't have a license.
