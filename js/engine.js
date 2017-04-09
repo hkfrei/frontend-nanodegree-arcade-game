@@ -115,7 +115,6 @@ var Engine = (function(global) {
         //check if any enemy collides with the player zone.
         allEnemies.forEach(function(enemy) {
             if ((enemy.x <= xmax && enemy.x >= xmin) && ((enemy.y <= ymax && enemy.y >= ymin))) {
-                console.log('collision!!!');
                 reset();
             }
         });
@@ -123,7 +122,6 @@ var Engine = (function(global) {
         //check if any collect item collides with the player zone.
         allCollectItems.forEach(function(item, index, array) {
             if ((item.x <= xmax && item.x >= xmin) && ((item.y <= ymax && item.y >= ymin))) {
-                console.log('collected!!!');
                 //remove the item
                 array.splice(index, 1);
                 //increase the score

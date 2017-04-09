@@ -1,3 +1,17 @@
+'use strict';
+/**
+* @description gameEntity (superclass) for Players, Enemies and Collects
+* @constructor
+* @param {string} sprite - The path to the sprite image
+* @param {string} x - The x coordinate on the canvas to place the instance
+* @param {string} y - The y coordinate on the canvas to place the instance
+*/
+var gameEntity = function(sprite, x, y) {
+    this.sprite = sprite;
+    this.x = x;
+    this.y = y;
+};
+
 /**
 * @description Enemies our player must avoid
 * @constructor
@@ -7,11 +21,15 @@
 * @param {string} speed - The speed of the instance in pixels per frame
 */
 var Enemy = function(sprite, x, y, speed) {
+    //call constructor of superclass
+    gameEntity.call(this, sprite, x, y);
     this.sprite = sprite;
-    this.x = x;
-    this.y = y;
     this.speed = speed;
 };
+//set the prototype to the supercslass prototype and change the constructor
+Enemy.prototype = Object.create(gameEntity.prototype, {
+    constructor: Enemy
+});
 
 /**
 * @description Update the enemy's position, required method for game.
@@ -42,13 +60,14 @@ Enemy.prototype.render = function() {
 * @param {string} y - The y coordinate on the canvas to place the instance
 * @param {string} sprite - The path to the sprite image
 */
-var Player = function(x, y, sprite) {
-    this.x = x;
-    this.y = y;
+var Player = function(sprite, x, y) {
+    gameEntity.call(this, sprite, x, y);
     this.highscore = 0;
     this.score = 0;
-    this.sprite = sprite;
 };
+Player.prototype = Object.create(gameEntity.prototype, {
+    constructor: Player
+});
 
 /**
 * @description Update the players position, update score etc., required method for game.
@@ -150,10 +169,14 @@ Player.prototype.handleInput = function(keyCode) {
 * @param {string} sprite - The path to the sprite image
 */
 var Collect = function(sprite) {
-    this.x = this.getRandomCoordinate(50, 400);
-    this.y = this.getRandomCoordinate(50, 300);
-    this.sprite = sprite;
+    gameEntity.call(this, sprite, this.getRandomCoordinate(50, 400),this.getRandomCoordinate(50, 400));
+    // this.x = this.getRandomCoordinate(50, 400);
+    // this.y = this.getRandomCoordinate(50, 300);
+    // this.sprite = sprite;
 };
+Collect.prototype = Object.create(gameEntity.prototype, {
+    constructor: Collect
+});
 
 /**
 * @description Draw the Collect item on the screen, required method for game
@@ -179,7 +202,7 @@ var allEnemies = [
     new Enemy('images/enemy-bug.png', 0, 240, 1)
 ];
 
-var player = new Player(200, 400, 'images/char-boy.png');
+var player = new Player('images/char-boy.png', 200, 400);
 
 var allCollectItems = [
     new Collect('images/Star.png'),
