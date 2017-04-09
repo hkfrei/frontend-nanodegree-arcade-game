@@ -106,7 +106,7 @@ var Engine = (function(global) {
      * allCollectItems Arraya and checks for collisions with the player.
      */
     function checkCollisions() {
-        //calculate the player zone (square of 40px x 40px)
+        //calculate the player zone (square of 80px x 80px)
         var xmin = player.x - 40;
         var xmax = player.x + 40;
         var ymin = player.y - 40;
