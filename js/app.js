@@ -64,6 +64,11 @@ var Player = function(sprite, x, y) {
     gameEntity.call(this, sprite, x, y);
     this.highscore = 0;
     this.score = 0;
+    this.MAXDOWN = 400;
+    this.MAXLEFT = -10;
+    this.MAXRIGHT = 410;
+    this.MAXUP = -20;
+    this.STARTPOSITION = 430;
 };
 Player.prototype = Object.create(gameEntity.prototype, {
     constructor: Player
@@ -74,22 +79,22 @@ Player.prototype = Object.create(gameEntity.prototype, {
 */
 Player.prototype.update = function() {
     // don't go too much down.
-    if (this.y > 400) {
-        this.y = 400;
+    if (this.y > this.MAXDOWN) {
+        this.y = this.MAXDOWN;
     }
 
     // dont't go too much left.
-    if (this.x < -10) {
-        this.x = -10;
+    if (this.x < this.MAXLEFT) {
+        this.x = this.MAXLEFT;
     }
 
     // dont't go too much right.
-    if (this.x > 410) {
-        this.x = 410;
+    if (this.x > this.MAXRIGHT) {
+        this.x = this.MAXRIGHT;
     }
 
     // success! player reached water.
-    if (this.y === -20) {
+    if (this.y === this.MAXUP) {
         var messages = document.querySelector('.successMessage');
         messages.innerHTML = '<h1>Cool you made it!</h1><h3>next level...</h3>';
         messages.style.display = 'block';
@@ -105,7 +110,7 @@ Player.prototype.update = function() {
         this.score += 5;
         this.updateHighScore();
         //move the player down starting position
-        this.y = 430;
+        this.y = this.STARTPOSITION;
 
         //add new collectItems if there aren't any
         if (allCollectItems.length === 0) {
@@ -144,21 +149,23 @@ Player.prototype.render = function() {
 * @param {string} keyCode - The code for the arrow key (left, right, up, down)
 */
 Player.prototype.handleInput = function(keyCode) {
+    // one click on arrow keys, moves the player 35px further
+    var MOVE = 35;
+
     switch(keyCode) {
         case 'left':
-            this.x -= 35;
+            this.x -= MOVE;
             break;
         case 'right':
-            this.x += 35;
+            this.x += MOVE;
             break;
         case 'up':
-            this.y -= 35;
+            this.y -= MOVE;
             break;
         case 'down':
-            this.y += 35;
+            this.y += MOVE;
             break;
         default:
-            console.log('this key has no use');
             break;
     }
 };
